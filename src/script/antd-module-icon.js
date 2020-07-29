@@ -1,0 +1,30 @@
+// Outline
+export { default as StarOutline } from '@ant-design/icons/lib/outline/StarOutline'
+export { default as PlusOutline } from '@ant-design/icons/lib/outline/PlusOutline'
+export { default as EyeOutline } from '@ant-design/icons/lib/outline/EyeOutline'
+export { default as DeleteOutline } from '@ant-design/icons/lib/outline/DeleteOutline'
+export { default as SearchOutline } from '@ant-design/icons/lib/outline/SearchOutline'
+export { default as DownOutline } from '@ant-design/icons/lib/outline/DownOutline'
+export { default as CheckOutline } from '@ant-design/icons/lib/outline/CheckOutline'
+export { default as UserOutline } from '@ant-design/icons/lib/outline/UserOutline'
+export { default as RightOutline } from '@ant-design/icons/lib/outline/RightOutline'
+export { default as LeftOutline } from '@ant-design/icons/lib/outline/LeftOutline'
+export { default as FileSyncOutline } from '@ant-design/icons/lib/outline/FileSyncOutline'
+export { default as PaperClipOutline } from '@ant-design/icons/lib/outline/PaperClipOutline'
+export { default as UploadOutline } from '@ant-design/icons/lib/outline/UploadOutline'
+export { default as CloseOutline } from '@ant-design/icons/lib/outline/CloseOutline'
+export { default as CloseSquareOutline } from '@ant-design/icons/lib/outline/CloseSquareOutline'
+export { default as LoadingOutline } from '@ant-design/icons/lib/outline/LoadingOutline'
+export { default as SettingOutline } from '@ant-design/icons/lib/outline/SettingOutline'
+export { default as BarsOutline } from '@ant-design/icons/lib/outline/BarsOutline'
+export { default as MenuUnfoldOutline } from '@ant-design/icons/lib/outline/MenuUnfoldOutline'
+export { default as ExportOutline } from '@ant-design/icons/lib/outline/ExportOutline'
+
+// TwoTone
+export { default as PictureOutline } from '@ant-design/icons/lib/twotone/PictureTwoTone'
+
+// Fill
+export { default as InfoCircleFill } from '@ant-design/icons/lib/fill/InfoCircleFill'
+export { default as CheckCircleFill } from '@ant-design/icons/lib/fill/CheckCircleFill'
+export { default as CloseCircleFill } from '@ant-design/icons/lib/fill/CloseCircleFill'
+export { default as ExclamationCircleFill } from '@ant-design/icons/lib/fill/ExclamationCircleFill'

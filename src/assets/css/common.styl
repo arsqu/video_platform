@@ -1,0 +1,92 @@
+textAlign(arrow)
+  text-align arrow
+.text-left
+  textAlign(left)
+.text-center
+  textAlign(center)
+.text-right
+  textAlign(right)
+$offMax = 5
+for $c in 0 .. $offMax
+  $percent = ($c * 10px)
+  .pt-{$c}
+    padding-top $percent
+  .pr-{$c}
+    padding-right $percent
+  .pl-{$c}
+    padding-left $percent
+  .pb-{$c}
+    padding-bottom $percent
+  .mt-{$c}
+    margin-top $percent
+  .mr-{$c}
+    margin-right $percent
+  .mb-{$c}
+    margin-bottom $percent
+  .ml-{$c}
+    margin-left $percent
+li
+  list-style none
+.lf
+  float left
+.rt
+  float right
+.c-block
+  display block
+.icon
+  cursor pointer
+  width 25px
+  height 25px
+  display inline-block
+.inline-block
+  display inline-block
+.font-break
+  word-break break-all
+.link
+  cursor pointer
+//table
+.listView
+  background #fff
+  padding 20px 20px 0
+.tips
+  color #f06b6b
+  font-size 16px
+&.success
+  color green
+//covered
+#nprogress .bar
+  background #ff5500 !important
+  height 3px
+//card
+.covered
+  .ant-card-head
+    border-bottom 0 none
+    color #1A86D3
+  .ant-modal-close-x
+    width 32px
+    height 32px
+    line-height 32px
+.icon_svg
+  color #eeeaea
+  vertical-align middle
+  font-size 25px
+.ant-upload-select-picture-card i
+  font-size 32px
+  color #999
+.ant-upload-select-picture-card .ant-upload-text
+  margin-top 8px
+  color #666
+.ant-upload-list-picture-card i
+  color hsla(0, 0, 100%, .85)
+.ant-input[disabled]
+  background-color #faf7f7
+  color #a8a8a8
+//drop-menu
+.ant-dropdown-menu-item.active
+  background-color #e6f7ff
+.detlTxt
+  font-size 16px
+  line-height 24px
+  display block
+  color rgba(0, 0, 0, .85)
+  margin-bottom 16px
