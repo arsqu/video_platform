@@ -1,4 +1,4 @@
-# merchant_platform
+# video_platform
 
 ## Project setup
 ```
