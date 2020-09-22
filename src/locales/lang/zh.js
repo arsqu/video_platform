@@ -1,11 +1,22 @@
 export default {
   common: {
-    income: '收入',
-    revenue: '代付',
-    info: '详情',
-    customer: '客户',
-    originOrder: '交易订单',
     construction: '功能正在建设中...'
+  },
+  searchForm: {
+    startTime: '开始时间',
+    endTime: '结束时间'
+  },
+  tips: {
+    success: {
+      def: '操作成功'
+    },
+    valid: {
+      image: '仅支持 jpg, jpeg, png, webp 格式',
+      svga: '仅支持 svga 格式的文件'
+    },
+    error: {
+      def: '操作失败'
+    }
   },
   btnGroup: {
     confirm: '确认',
@@ -17,52 +28,431 @@ export default {
     signin: '登录',
     signup: '注册',
     detl: '详情',
-    withdrawal: '申请提现',
     add: '新增',
-    export: '导出'
-  },
-  database: {
-    currency: '货币',
-    appName: '应用名'
-  },
-  components: {
-    result: {
-      app: '应用正在审核中',
-      btnTxt: '返回'
+    export: '导出',
+    file: {
+      svga: '选择svga文件'
     }
   },
-  userHead: {
-    logout: '退出',
-    navTool: ['账户信息', '公司信息']
+  permission: {
+    account: {
+      defTable: {
+        account: '账号',
+        createTime: '创建时间'
+      },
+      defForm: {
+        account: {
+          label: '账号'
+        }
+      }
+    }
   },
-  account: {
-    wel_text: '您好',
-    navbar: [
-      '首页',
-      '交易记录',
-      '结算记录',
-      '提现记录',
-      '结算汇总',
-      // '货币结算',
-      '开发文档'
-    ],
-    card: {
-      apply: {
-        head: '应用申报',
-        content: '接受在线或应用内付款'
+  video: {
+    callList: {
+      searchForm: {
+        cname: '频道名',
+        startTime: '@:searchForm.startTime',
+        endTime: '@:searchForm.endTime'
       },
-      record: {
-        head: '交易记录',
-        content: '了解收支情况。您可以在这里查看最近的交易'
-      },
-      withdrawal: {
-        head: '余额提现',
-        content: '接受应用余额提现'
+      defTable: {
+        cname: '@:video.callList.searchForm.cname',
+        created_ts: '通话开始',
+        destroyed_ts: '通话结束',
+        finished: '通话状态'
       }
     },
-    headList: {
-      product: '上线列表',
-      approval: '审核列表'
+    scale: {
+      searchForm: {
+        metric: '查询指标',
+        startTime: '@:searchForm.startTime',
+        endTime: '@:searchForm.endTime'
+      },
+      defTable: {
+        pcc: '@:mapConfig.video.scale.metric.pcc',
+        pcu: '@:mapConfig.video.scale.metric.pcu',
+        ts: '时间'
+      }
+    },
+    experience: {
+      searchForm: {
+        metric: '查询指标',
+        startTime: '@:searchForm.startTime',
+        endTime: '@:searchForm.endTime'
+      },
+      defTable: {
+        joinSuccessRate: '@:mapConfig.video.experience.metric.joinSuccessRate',
+        joinSuccess5SecsRate: '@:mapConfig.video.experience.metric.joinSuccess5SecsRate',
+        videoFreezeRate: '@:mapConfig.video.experience.metric.videoFreezeRate',
+        audioFreezeRate: '@:mapConfig.video.experience.metric.audioFreezeRate',
+        ts: '时间'
+      }
+    },
+    network: {
+      searchForm: {
+        metric: '查询指标',
+        startTime: '@:searchForm.startTime',
+        endTime: '@:searchForm.endTime'
+      },
+      defTable: {
+        videoUpstreamExcellentTransRate: '@:mapConfig.video.network.metric.videoUpstreamExcellentTransRate',
+        audioUpstreamExcellentTransRate: '@:mapConfig.video.network.metric.audioUpstreamExcellentTransRate',
+        videoEnd2EndExcellentTransRate: '@:mapConfig.video.network.metric.videoEnd2EndExcellentTransRate',
+        audioEnd2EndExcellentTransRate: '@:mapConfig.video.network.metric.audioEnd2EndExcellentTransRate',
+        ts: '时间'
+      }
+    },
+    abnormal: {
+      searchForm: {
+        type: '类型',
+        startTime: '@:searchForm.startTime',
+        endTime: '@:searchForm.endTime'
+      },
+      defTable: {
+        type: '@:abnormal.searchForm.type',
+        cname: '频道名',
+        ts: '时间',
+        user: '异常用户Id',
+        exp_id: '异常Id',
+        exp_desc: '异常描述',
+        factor_desc: '异常描述',
+        factor_id: '异常id',
+        host_user: '异常用户',
+        createTime: '创建日期',
+        updateTime: '修改日期'
+      },
+      defForm: {
+        sysKey: {
+          label: '@:control.gifts.defTable.sysKey'
+        },
+        rate: {
+          label: '@:control.gifts.defTable.rate'
+        },
+        sysValue: {
+          label: '@:control.gifts.defTable.sysValue'
+        },
+        sysFirstValue: {
+          label: '@:control.gifts.defTable.sysFirstValue'
+        }
+      }
+    }
+  },
+  user: {
+    active: {
+      defTable: {
+        yesterdayActiveNum: '昨日用户活跃量',
+        currentActiveNum: '当前用户活跃量',
+        firstMonthNum: '上月用户活跃量',
+        currentMonthActiveNum: '当月用户活跃量'
+      }
+    },
+    user: {
+      searchForm: {
+        usta: '封禁状态',
+        utype: '用户类型',
+        startTime: '@:searchForm.startTime',
+        endTime: '@:searchForm.endTime'
+      },
+      defTable: {
+        uname: '用户名',
+        registerDate: '注册时间',
+        status: '是否删除',
+        utype: '@:user.user.searchForm.utype',
+        usta: '@:user.user.searchForm.usta',
+        chCode: '渠道来源',
+        loginTime: '登录时间',
+        outTime: '离线时间',
+        umail: '邮箱',
+        bankName: '银行',
+        code: '银行卡号',
+        bust: '胸围',
+        Waist: '腰部',
+        Hips: '臀围',
+        height: '身高',
+        bodyWeight: '体重',
+        bankCard: '银行卡',
+        idCode: '身份证号',
+        realNameAuth: '实名认证',
+        profession: '职业',
+        outward: '外貌特征',
+        actualName: '真实姓名',
+        freezeTime: '封号时间',
+        upass: '密码',
+        uph: '手机号',
+        uimg: '头像',
+        ulabel: '个性签名',
+        usex: '性别',
+        uaddress: '地址',
+        ubirthday: '生日'
+      },
+      defForm: {}
+    }
+  },
+  audit: {
+    feedback: {
+      searchForm: {
+        type: '业务类型',
+        result: '处理状态',
+        startTime: '@:searchForm.startTime',
+        endTime: '@:searchForm.endTime'
+      },
+      defTable: {
+        type: '@:audit.feedback.searchForm.type',
+        result: '@:audit.feedback.searchForm.result',
+        createTime: '创建时间',
+        updateTime: '修改时间',
+        targetId: '被举报用户ID',
+        infoDesc: '说明信息',
+        phone: '手机号',
+        informId: '举报ID',
+        informTwoId: '违规ID',
+        userName: '举报人',
+        userName1: '反馈人',
+        targetName: '被举报用户',
+        informValue: '举报信息',
+        informValue1: '反馈信息',
+        report: '违规类型',
+        report1: '反馈类型',
+        uid: '用户ID'
+      },
+      defForm: {}
+    },
+    anchor: {
+      searchForm: {
+        approvalSta: '审核状态',
+        startTime: '@:searchForm.startTime',
+        endTime: '@:searchForm.endTime'
+      },
+      defTable: {
+        source: '主播信息',
+        anchorName: '主播名',
+        headImg: '主播头像',
+        anchorPh: '联系方式',
+        approvalSta: '@:audit.anchor.searchForm.approvalSta',
+        videoUrl: '主播视频',
+        voiceUrl: '主播音频',
+        imgUrl: '主播图片',
+        content: '未通过原因',
+        approvalDate: '提交日期'
+      },
+      defForm: {}
+    },
+    withdraw: {
+      searchForm: {
+        result: '提现状态',
+        startTime: '@:searchForm.startTime',
+        endTime: '@:searchForm.endTime'
+      },
+      defTable: {
+        status: 'status',
+        type: 'type',
+        goldNum: '提现金额',
+        amount: '到账金额',
+        bardInfo: '银行卡信息',
+        handFee: '提现手续费',
+        content: '未通过原因',
+        result: '@:audit.withdraw.searchForm.result',
+        createTime: '申请日期',
+        updateTime: '审批日期'
+      },
+      defForm: {}
+    }
+  },
+  record: {
+    pay: {
+      searchForm: {
+        str: '邮箱号',
+        type: '收支类型',
+        optType: '消费类型',
+        userName: '用户名',
+        startTime: '@:searchForm.startTime',
+        endTime: '@:searchForm.endTime'
+      },
+      defTable: {
+        type: '@:statistics.pay.searchForm.type',
+        optType: '@:statistics.pay.searchForm.optType',
+        userName: '@:statistics.pay.searchForm.userName',
+        createTime: '创建时间',
+        updateTime: '修改时间',
+        optDesc: '支付明细',
+        goldNum: '金币数量',
+        targetId: '目标ID',
+        uid: '用户ID',
+        result: '业务状态'
+      },
+      defForm: {}
+    },
+    recharge: {
+      searchForm: {
+        userName: '用户名',
+        startTime: '@:searchForm.startTime',
+        endTime: '@:searchForm.endTime'
+      },
+      defTable: {
+        userName: '@:statistics.pay.searchForm.userName',
+        createTime: '创建时间',
+        updateTime: '修改时间',
+        recMoney: '充值金额',
+        recCoin: '充值金币',
+        rewardCoin: '奖励金币',
+        recDate: '充值日期',
+        uid: '用户ID'
+      },
+      defForm: {}
+    },
+    withdraw: {
+      searchForm: {
+        userName: '用户名',
+        startTime: '@:searchForm.startTime',
+        endTime: '@:searchForm.endTime'
+      },
+      defTable: {
+        userName: '@:statistics.pay.searchForm.userName',
+        createTime: '提现日期',
+        updateTime: '修改时间',
+        goldNum: '提现金币',
+        amount: '到账金额',
+        handFee: '提现手续费',
+        content: '失败原因',
+        result: '是否成功',
+        bardInfo: '银行卡',
+        uid: '用户ID'
+      },
+      defForm: {}
+    }
+  },
+  statistics: {
+    pay: {
+      searchForm: {
+        type: '收支类型',
+        optType: '消费类型',
+        userName: '用户名',
+        startTime: '@:searchForm.startTime',
+        endTime: '@:searchForm.endTime'
+      },
+      defTable: {
+        type: '@:statistics.pay.searchForm.type',
+        optType: '@:statistics.pay.searchForm.optType',
+        userName: '@:statistics.pay.searchForm.userName',
+        createTime: '创建时间',
+        updateTime: '修改时间',
+        optDesc: '支付明细',
+        goldNum: '金币数量',
+        targetId: '目标ID',
+        uid: '用户ID',
+        result: '业务状态'
+      },
+      defForm: {}
+    },
+    recharge: {
+      searchForm: {
+        userName: '用户名',
+        startTime: '@:searchForm.startTime',
+        endTime: '@:searchForm.endTime'
+      },
+      defTable: {
+        userName: '@:statistics.pay.searchForm.userName',
+        recDate: '充值日期',
+        recMoney: '充值金额总数',
+        recCoin: '充值金币总数',
+        rewardCoin: '奖励金币总数',
+        uid: '用户ID'
+      },
+      defForm: {}
+    },
+    withdraw: {
+      searchForm: {
+        userName: '用户名',
+        startTime: '@:searchForm.startTime',
+        endTime: '@:searchForm.endTime'
+      },
+      defTable: {
+        userName: '@:statistics.pay.searchForm.userName',
+        createTime: '提现日期',
+        updateTime: '修改时间',
+        goldNum: '提现总金币',
+        amount: '到账总金额',
+        handFee: '提现手续费',
+        content: '失败原因',
+        result: '是否成功',
+        bardInfo: '银行卡',
+        uid: '用户ID'
+      },
+      defForm: {}
+    }
+  },
+  control: {
+    gifts: {
+      searchForm: {
+        type: '类型',
+        startTime: '@:searchForm.startTime',
+        endTime: '@:searchForm.endTime'
+      },
+      defTable: {
+        type: '@:control.gifts.searchForm.type',
+        sysKey: '礼物金币数额',
+        sysValue: 'svga图',
+        result: '是否启用',
+        sysFirstValue: '礼物图片',
+        rate: '礼物抽取费率',
+        createTime: '创建日期',
+        updateTime: '修改日期'
+      },
+      defForm: {
+        sysKey: {
+          label: '@:control.gifts.defTable.sysKey'
+        },
+        result: {
+          label: '@:control.gifts.defTable.result'
+        },
+        rate: {
+          label: '@:control.gifts.defTable.rate'
+        },
+        sysValue: {
+          label: '@:control.gifts.defTable.sysValue'
+        },
+        sysFirstValue: {
+          label: '@:control.gifts.defTable.sysFirstValue'
+        }
+      }
+    },
+    upload: {
+      searchForm: {},
+      defTable: {
+        oldVersion: '当前版本',
+        lowestVersion: '最低支持',
+        newVersion: '最新版本',
+        forcibly: '是否强制更新',
+        apkUrl: '安装包',
+        content: '更新文案',
+        createTime: '创建日期',
+        updateTime: '修改日期'
+      },
+      defForm: {
+        oldVersion: {
+          label: '@:control.upload.defTable.oldVersion'
+        },
+        lowestVersion: {
+          label: '@:control.upload.defTable.lowestVersion'
+        },
+        newVersion: {
+          label: '@:control.upload.defTable.newVersion'
+        },
+        forcibly: {
+          label: '@:control.upload.defTable.forcibly',
+          tips: {
+            req: '@:control.upload.defTable.forcibly'
+          }
+        },
+        apkUrl: {
+          label: '@:control.upload.defTable.apkUrl',
+          tips: {
+            req: '请上传安装包'
+          }
+        },
+        content: {
+          label: '@:control.upload.defTable.content'
+        }
+      }
     }
   },
   signup: {
@@ -131,10 +521,11 @@ export default {
       //   }
       // },
       identity: {
-        label: '账号或邮箱',
-        placeholder: '请输入邮箱或账号',
+        // label: '账号或邮箱',
+        label: '账号',
+        placeholder: '请输入账号',
         tips: {
-          req: '请输入邮箱或账号',
+          req: '请输入账号',
           err: ''
         }
       },
@@ -164,137 +555,9 @@ export default {
   tableList: {
     header: {
       operation: '操作'
-    },
-    appTable: {
-      appName: '@:database.appName',
-      result: '审核状态',
-      appType: '应用类型',
-      appNo: '应用号',
-      appTyp: '应用类型',
-      signKey: '签名关键字',
-      syncUrl: '回调地址',
-      countryList: '国家列表',
-      ipList: 'ip白名单',
-      createTime: '创建时间',
-      appContent: '应用描述',
-      appCate: '应用类型',
-      ad: '创建时间'
-    },
-    recordTable: {
-      searchForm: {
-        searchType: '交易类型',
-        str: '@:tableList.appTable.appNo',
-        currency: '@:database.currency',
-        orderNo: '@:tableList.recordTable.orderNo',
-        payStatus: '@:tableList.recordTable.payStatus',
-        payoutsStatus: '支付状态',
-        startTime: '开始时间',
-        endTime: '结束时间'
-      },
-      mchCallbackUrl: '商户回调地址',
-      datestr: '银行卡',
-      payoutsStatus: '支付状态',
-      appName: '@:database.appName',
-      appNo: '@:tableList.appTable.appNo',
-      channelName: '支付通道',
-      title: '支付能力',
-      orderNo: '订单号',
-      currency: '@:database.currency',
-      mchOrderNo: '商户订单号',
-      outAd: '@:common.revenue时间',
-      ptmPaymentmode: 'paymentmode',
-      mchParam: '商户透传参数',
-      mchCustId: '交易客户号',
-      custId: '交易客户号',
-      amount: '支付金额',
-      mchBackUrl: '支付返回地址',
-      ad: '下单时间',
-      payAd: '下单时间',
-      payStatus: '支付状态',
-      syncStatus: '同步状态',
-      custPhone: '客户手机',
-      custMail: '客户邮箱',
-      custAccount: '客户账号',
-      custIfcs: '客户Ifcs',
-      custVpa: '客户Vpa',
-      handFee: '手续费',
-      handFeeRate: '手续费比率'
-    },
-    settleTable: {
-      searchForm: {
-        str: '@:tableList.appTable.appNo',
-        appName: '@:database.appName',
-        currency: '@:database.currency',
-        orderNo: '@:tableList.recordTable.orderNo',
-        payStatus: '@:tableList.recordTable.payStatus',
-        payAd: '@:tableList.settleTable.payAd',
-        ad: '@:tableList.settleTable.ad',
-        startTime: '开始时间',
-        endTime: '结束时间'
-      },
-      appNo: '@:tableList.appTable.appNo',
-      appName: '@:database.appName',
-      orderNo: '订单号',
-      currency: '@:database.currency',
-      amount: '交易金额',
-      setAmount: '结算金额',
-      handFee: '手续费',
-      headFee: '手续费',
-      headFeeRate: '手续费比率',
-      exchangeRate: '美元汇率',
-      payAd: '下单时间',
-      payoutAd: '@:tableList.settleTable.ad',
-      ad: '结算时间'
-    },
-    rateTable: {
-      insummary: '收入汇总',
-      outsummary: '@:common.revenue汇总',
-      appName: '@:database.appName',
-      appNo: '@:tableList.recordTable.appNo',
-      currency: '@:database.currency',
-      totalAmount: '收入金额',
-      amount: '@:common.revenue金额',
-      handFee: '@:common.revenue手续费',
-      totalSetAmount: '结算金额',
-      beAd: '开始时间',
-      edAd: '结算时间',
-      ad: '入库时间'
-    },
-    withdrawalTable: {
-      searchForm: {
-        currency: '@:database.currency',
-        str: '@:tableList.recordTable.appNo',
-        carryStatus: '@:tableList.withdrawalTable.carryStatus',
-        startTime: '开始时间',
-        endTime: '结束时间'
-      },
-      currency: '@:database.currency',
-      amount: '提现金额',
-      appNo: '@:tableList.appTable.appNo',
-      appName: '@:database.appName',
-      merchantName: '申请人',
-      carryStatus: '提现状态',
-      ad: '申请日期'
-    },
-    balanceWithdrawal: {
-      searchForm: {
-        currency: '@:database.currency',
-        str: '@:tableList.recordTable.appNo'
-      },
-      currency: '@:database.currency',
-      appNo: '@:tableList.recordTable.appNo',
-      amount: '可提现余额',
-      ad: 'application date'
     }
   },
   formList: {
-    step: {
-      0: '公司信息',
-      1: '申请应用',
-      2: '信息审核',
-      3: '成功',
-      4: '商户账号'
-    },
     common: {
       add: '',
       submit: '提交成功',
@@ -302,385 +565,144 @@ export default {
       p: '请输入',
       r: '必填',
       v: '格式错误'
-    },
-    accInfo: {
-      account: {
-        label: '账号',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      email: {
-        label: '电子邮箱',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      pwd: {
-        label: '密码',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      merchant: {
-        label: '商户名',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      userPhone: {
-        label: '手机号',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      }
-    },
-    comInfo: {
-      companyName: {
-        label: '公司名',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      regAddress: {
-        label: '公司地址',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      phone: {
-        label: '联系方式',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      createTime: {
-        label: '成立时间',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      allotedTime: {
-        label: '经营期限',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      businessScope: {
-        label: '经营范围',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      bankInfo: {
-        label: '开户行名称',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      bankAddress: {
-        label: '银行地址',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      bankNum: {
-        label: '银行账号',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      bankCode: {
-        label: 'SWIFT代码',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      businessLicense: {
-        label: '营业执照',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      contract: {
-        label: '合同文件',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      idCard: '身份证',
-      cardFront: {
-        label: '正面',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      cardBack: {
-        label: '反面',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      tips: {
-        image: '支持拓展名: jpg, jpeg, png, webp'
-      }
-    },
-    applyApp: {
-      appName: {
-        label: '应用名',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      appNo: {
-        label: '应用号',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      appTyp: {
-        label: '应用类型',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      appAddress: {
-        label: '网上商店网站/ APP下载地址',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      appContent: {
-        label: '应用描述',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      appCate: {
-        label: '应用所属类目',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      signKey: {
-        label: '签名关键字',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      syncUrl: {
-        label: '同步地址',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      countryList: {
-        label: '目标国家',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      ipList: {
-        label: 'ip白名单',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      ad: {
-        label: '创建时间',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      tips: {
-        submit: '提交成功,等待审核'
-      }
-    },
-    withdrawal: {
-      amount: {
-        label: '提现金额',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      appNo: {
-        label: '@:tableList.appTable.appNo',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      currency: {
-        label: '@:database.currency',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      }
-    },
-    balanceWithdrawal: {
-      amount: {
-        label: '提现金额',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: '请确认输入的金额是否有误,仅可输入整数金额'
-        }
-      },
-      appNo: {
-        label: '@:tableList.appTable.appNo',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      },
-      currency: {
-        label: '@:database.currency',
-        placeholder: '',
-        tips: {
-          req: '',
-          err: ''
-        }
-      }
     }
   },
   messages: 'test message',
   statusCode: {
-    4010: '该邮箱已注册，请直接登录!',
-    4011: '系统发生异常，请联系管理员!',
-    4012: '验证码未过期， 请勿重复获取',
-    4013: '邮箱输入错误或验证码已过期，请仔细检查',
-    4014: '两次密码不一致，请重新输入',
-    4015: '验证码错误',
-    4016: 'token错误',
-    4017: '账号未注册',
-    4018: '账号或密码错误',
-    4019: '账号未登录，请先登录账号',
-    4020: 'token失效',
-    4021: '文件上传失败',
-    4022: '文件上传失败',
-    4023: '文件key错误',
-    4024: '未查询到该应用，请确认输入是否正确',
-    4025: '邮件发送异常，请检查邮箱地址是否正确!',
-    4026: 'excel导出异常!',
-    4027: '公司信息修改失败!',
-    4028: '该账号不可用!',
-    4029: '你没有该应用,无法修改!',
-    4030: '没有查到数据',
-    4031: '没有内容，不可导出!',
-    4032: '审核中应用无法修改',
-    4033: '审核成功无法修改',
-    4034: '信息提交成功，不可重复提交',
-    4035: '审核中，无法修改!',
-    4036: '余额不足，不可提现',
-    4037: '不可提现，请确认是否正确'
+    5001: '文件上传异常',
+    5002: '文件删除异常',
+    5003: '邮箱发送异常',
+    5004: '验证码未过期，请勿重复发送!',
+    5005: '验证码已过期，请重新获取!',
+    5006: '该账号已存在，请直接登录!',
+    5007: '账号未注册!',
+    5008: '密码错误，请重新输入!',
+    5009: '账号未登录，请先登录账号',
+    5010: 'token错误',
+    5011: 'token已过期，请重新登录!',
+    5012: 'TOKEN解析错误!',
+    5013: '权限不足',
+    5014: '验证码错误',
+    5015: '用户不存在，请确认输入是否正确!',
+    5016: '该用户未申请主播，请确认是否正确!',
+    5017: '账号或密码错误'
   },
   errCode: '服务器错误',
   mapConfig: {
-    account: {
-      appTyp: {
-        1: 'App',
-        2: '网站',
-        3: '手机网站'
+    video: {
+      callList: {
+        finished: {
+          true: '已结束',
+          false: '通话中中'
+        }
+      },
+      scale: {
+        metric: {
+          pcu: '用户数',
+          pcc: '频道数'
+        }
+      },
+      experience: {
+        metric: {
+          joinSuccessRate: '加入成功率',
+          joinSuccess5SecsRate: '五秒加入成功率',
+          videoFreezeRate: '视频卡顿率',
+          audioFreezeRate: '音频卡顿率'
+        }
+      },
+      network: {
+        metric: {
+          videoUpstreamExcellentTransRate: '上行视频优质传输率',
+          audioUpstreamExcellentTransRate: '上行音频优质传输率',
+          videoEnd2EndExcellentTransRate: '视频优质传输率',
+          audioEnd2EndExcellentTransRate: '音频优质传输率'
+        }
+      },
+      abnormal: {
+        type: {
+          1: '音视频',
+          2: '实时消息'
+        }
+      }
+    },
+    audit: {
+      feedback: {
+        result: {
+          1: '未处理',
+          2: '已处理'
+        },
+        type: {
+          1: '举报',
+          2: '反馈'
+        }
+      },
+      anchor: {
+        approvalSta: {
+          1: '待审批',
+          2: '成功',
+          3: '拒绝'
+        }
       },
       result: {
-        1: '审核中',
-        2: '未通过',
-        3: '通过'
-      }
-    },
-    record: {
-      payStatus: {
-        0: '支付中',
+        0: '失败',
         1: '成功',
-        2: '失败'
-      },
-      payoutsStatus: {
-        0: '交易中',
-        1: '转账成功',
-        2: '转账失败'
-      },
-      syncStatus: {
-        '-1': '不再反馈',
-        0: '待反馈',
-        1: '同步成功',
-        2: '同步失败'
-      },
-      searchType: {
-        0: '收入',
-        1: '代付'
+        2: '处理中'
       }
     },
-    withdrawal: {
-      carryStatus: {
-        1: '待审核',
-        2: '通过',
-        3: '拒绝'
+    statistics: {
+      pay: {
+        type: {
+          1: '充值',
+          2: '视频',
+          3: '音频',
+          4: '刷礼物',
+          5: '购买相册'
+        },
+        optType: {
+          1: '支出',
+          2: '收益'
+        },
+        result: {
+          1: '已读',
+          2: '未读'
+        }
+      }
+    },
+    user: {
+      user: {
+        usta: {
+          1: '正常',
+          2: '封禁'
+        },
+        utype: {
+          1: '用户',
+          2: 'vip',
+          3: '主播'
+          // 4: '管理员'
+        },
+        realNameAuth: {
+          0: '未认证',
+          1: '认证'
+        },
+        usex: {
+          0: '女',
+          1: '男'
+        }
+      }
+    },
+    control: {
+      gifts: {
+        type: {
+          1: '礼物',
+          2: '提现手续费'
+        }
+      },
+      upload: {
+        forcibly: {
+          1: '不强制',
+          2: '强制',
+          3: '不更新'
+        }
       }
     }
   }

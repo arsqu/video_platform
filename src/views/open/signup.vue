@@ -1,13 +1,14 @@
 <template>
   <div class="login">
     <div class="header">
-      <a :href="this.$util.getPublicPath()" class="web_logo"></a>
-      <router-link :to="{name:'signin'}" class="login_btn ant-btn">{{$t('btnGroup.signin')}}</router-link>
+      <router-link :to="{ name: 'signin' }" class="login_btn ant-btn">{{
+        $t('btnGroup.signin')
+      }}</router-link>
       <!-- <a-button shape="round" class="login_btn">{{$t('btnGroup.signin')}}</a-button> -->
     </div>
     <div class="section">
       <div class="sign_box">
-        <h3 class="sign_desc">{{$t('btnGroup.signup')}}</h3>
+        <h3 class="sign_desc">{{ $t('btnGroup.signup') }}</h3>
         <a-form-model
           ref="ruleForm"
           layout="vertical"
@@ -16,32 +17,44 @@
           :label-col="labelCol"
           :wrapper-col="wrapperCol"
         >
-          <a-form-model-item :label="mWords('account','l')" prop="account">
+          <!-- <a-form-model-item :label="mWords('account','l')" prop="account">
             <a-input size="large" v-model="ruleForm.account" :placeholder="mWords('account','p')" />
-          </a-form-model-item>
-          <a-form-model-item :label="mWords('email','l')" prop="email">
+          </a-form-model-item>-->
+          <a-form-model-item :label="mWords('email', 'l')" prop="umail">
             <a-input-search
               size="large"
-              :placeholder="mWords('email','p')"
-              v-model="ruleForm.email"
+              autocomplete="current-email"
+              :placeholder="mWords('email', 'p')"
+              v-model="ruleForm.umail"
             >
               <a-button
                 slot="enterButton"
                 type="primary"
-                :class="{valid:showTime}"
+                :class="{ valid: showTime }"
                 @click.native="getMail"
                 :disabled="showTime"
               >
-                <span v-show="showEmail">{{$t('signup.form.sendCode')}}</span>
-                <span v-show="showTime">{{timeLast}}</span>
+                <span v-show="showEmail">{{ $t('signup.form.sendCode') }}</span>
+                <span v-show="showTime">{{ timeLast }}</span>
               </a-button>
-              <!-- <a-button slot="enterButton" @click.native="sendCode">{{$t('signup.form.sendCode')}}</a-button> -->
+              <a-button slot="enterButton" @click.native="sendCode">{{
+                $t('signup.form.sendCode')
+              }}</a-button>
             </a-input-search>
           </a-form-model-item>
-          <a-form-model-item :label="mWords('code','l')" prop="code">
-            <a-input size="large" v-model="ruleForm.code" :placeholder="mWords('code','p')" />
+          <a-form-model-item :label="mWords('code', 'l')" prop="code">
+            <a-input
+              size="large"
+              autocomplete="current-code"
+              v-model="ruleForm.code"
+              :placeholder="mWords('code', 'p')"
+            />
           </a-form-model-item>
-          <a-form-model-item class="form-item-password" :label="mWords('pwd','l')" prop="pwd">
+          <a-form-model-item
+            class="form-item-password"
+            :label="mWords('pwd', 'l')"
+            prop="upass"
+          >
             <!-- <template slot="extra">
               <a-tooltip>
                 {{$t('signup.form.pwd.tips.descTxt')}}
@@ -52,41 +65,42 @@
             </template>-->
             <a-input
               size="large"
+              autocomplete="current-password"
               type="password"
-              v-model="ruleForm.pwd"
-              :placeholder="mWords('pwd','p')"
+              v-model="ruleForm.upass"
+              :placeholder="mWords('pwd', 'p')"
             />
           </a-form-model-item>
-          <a-form-model-item :label="mWords('rPwd','l')" prop="verifyPassword">
+          <!-- <a-form-model-item :label="mWords('rPwd','l')" prop="verifyPassword">
             <a-input
               size="large"
               type="password"
               v-model="ruleForm.verifyPassword"
               :placeholder="mWords('rPwd','p')"
             />
-          </a-form-model-item>
-          <a-form-model-item>
+          </a-form-model-item>-->
+          <!-- <a-form-model-item>
             <a-checkbox v-model="checked">
-              <!-- @click="viewInfo" -->
-              <!-- <span>{{$t('signup.form.notice')}}</span> -->
               <span @click="viewInfo" v-html="$t('signup.form.notice')"></span>
-              <!-- <span @click="viewInfo" v-html="$t('signup.form.notice')"></span> -->
             </a-checkbox>
-          </a-form-model-item>
+          </a-form-model-item>-->
           <a-form-model-item align="center">
+            <!-- :disabled="!checked" -->
             <a-button
               block
               type="primary"
               size="large"
               :loading="loading"
-              :disabled="!checked"
               @click="submitForm('ruleForm')"
-            >{{$t('signup.form.btnTxt')}}</a-button>
+              >{{ $t('signup.form.btnTxt') }}</a-button
+            >
             <!-- <a-button style="margin-left: 10px" @click="resetForm('ruleForm')">Reset</a-button> -->
           </a-form-model-item>
           <a-form-model-item class="mt-0" align="center">
             <!-- <a href="/open/signin.html">{{$t('btnGroup.signin')}}</a> -->
-            <router-link tag="a" :to="{name:'signin'}">{{$t('btnGroup.signin')}}</router-link>
+            <router-link tag="a" :to="{ name: 'signin' }">{{
+              $t('btnGroup.signin')
+            }}</router-link>
           </a-form-model-item>
         </a-form-model>
       </div>
@@ -95,17 +109,18 @@
 </template>
 
 <script>
+import Qs from 'qs'
 export default {
   data() {
     return {
       checked: false,
       // form-model
       ruleForm: {
-        email: '',
+        umail: '',
         code: '',
-        account: '',
-        pwd: '',
-        verifyPassword: ''
+        // account: '',
+        upass: ''
+        // verifyPassword: ''
       },
       timer: null, // 定时器
       loading: false,
@@ -124,7 +139,7 @@ export default {
       //   })
       // }
       rules: {
-        email: [
+        umail: [
           {
             required: true,
             message: this.mWords('email', 'r'),
@@ -136,13 +151,13 @@ export default {
             trigger: 'blur'
           }
         ],
-        account: [
-          {
-            required: true,
-            trigger: 'blur',
-            message: this.mWords('account', 'r')
-          }
-        ],
+        // account: [
+        //   {
+        //     required: true,
+        //     trigger: 'blur',
+        //     message: this.mWords('account', 'r')
+        //   }
+        // ],
         code: [
           {
             required: true,
@@ -150,30 +165,30 @@ export default {
             trigger: 'blur'
           }
         ],
-        pwd: [
+        upass: [
           {
             required: true,
             message: this.mWords('pwd', 'r'),
             trigger: 'blur'
-          },
-          {
-            validator: this.validPwd,
-            message: this.mWords('pwd', 'v'),
-            trigger: 'blur'
           }
-        ],
-        verifyPassword: [
-          {
-            required: true,
-            message: this.mWords('rPwd', 'r'),
-            trigger: 'blur'
-          },
-          {
-            validator: this.secValid,
-            message: this.mWords('rPwd', 'v'),
-            trigger: 'change'
-          }
+          // {
+          //   validator: this.validPwd,
+          //   message: this.mWords('pwd', 'v'),
+          //   trigger: 'blur'
+          // }
         ]
+        // verifyPassword: [
+        //   {
+        //     required: true,
+        //     message: this.mWords('rPwd', 'r'),
+        //     trigger: 'blur'
+        //   },
+        //   {
+        //     validator: this.secValid,
+        //     message: this.mWords('rPwd', 'v'),
+        //     trigger: 'change'
+        //   }
+        // ]
       }
     }
   },
@@ -213,7 +228,9 @@ export default {
       this.$util.Message(this.$t('signup.tips.sendCode'))
       this.countdown() // 开始倒计时
       this.$axios
-        .postData('open.register.sendMail', { email: v })
+        .postData('open.register.sendMail', Qs.stringify({ email: v }), {
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        })
         .then(res => {
           console.log(res)
           if (res.code === 200) {
@@ -230,7 +247,7 @@ export default {
     },
     // 邮箱验证码
     getMail() {
-      var v = this.ruleForm.email
+      var v = this.ruleForm.umail
       var reg = /^.+@.+\..+/ // async-validate 邮箱正则
       if (!reg.test(v)) {
         console.log('校验失败不提交')
@@ -280,28 +297,28 @@ export default {
       if (value === '') {
         callback(new Error(false))
       } else {
-        if (this.ruleForm.verifyPassword !== '') {
-          this.$refs.ruleForm.validateField('verifyPassword')
-        }
-        callback()
-      }
-    },
-    // 二次校验密码
-    secValid(rule, value, callback) {
-      if (value === '') {
-        callback(new Error(false))
-      } else if (value !== this.ruleForm.pwd) {
-        callback(new Error(false))
-      } else {
+        // if (this.ruleForm.verifyPassword !== '') {
+        //   this.$refs.ruleForm.validateField('verifyPassword')
+        // }
         callback()
       }
     }
+    // // 二次校验密码
+    // secValid(rule, value, callback) {
+    //   if (value === '') {
+    //     callback(new Error(false))
+    //   } else if (value !== this.ruleForm.pwd) {
+    //     callback(new Error(false))
+    //   } else {
+    //     callback()
+    //   }
+    // }
   }
 }
 </script>
 
 <style lang="stylus">
-//覆盖全局样式
+// 覆盖全局样式
 body
   background #FBFBFE
   height auto
@@ -310,6 +327,7 @@ body
 <style lang="stylus" scoped>
 .login
   width 100%
+
 .header
   position absolute
   font-size 0
@@ -323,13 +341,14 @@ body
   a
     margin 15px 32px
   .web_logo
+    font-size 25px
     display inline-block
-    width 124px
-    height 53px
-    //background url('/static/image/logo.png') 0 0 / 124px 53px
-    //background-image url('/static/image/logo.png'), none
-    background url('~@assets/image/logo.png') 0 0 / 124px 53px
-    background-image url('~@assets/image/logo.png'), none
+    // width 124px
+    // height 53px
+    // background url('/static/image/logo.png') 0 0 / 124px 53px
+    // background-image url('/static/image/logo.png'), none
+    // background url('~@assets/image/logo.png') 0 0 / 124px 53px
+    // background-image url('~@assets/image/logo.png'), none
   .login_btn
     background 0 0
     color #1781B2
@@ -344,6 +363,7 @@ body
     &:hover
       color #253B80
       border-color #253B80
+
 .section
   .sign_box
     position relative

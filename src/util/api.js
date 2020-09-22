@@ -1,68 +1,89 @@
 export const crossUrl = {
   open: {
-    login: '/merchant/login',
-    logOut: '/merchant/login/out',
+    login: '/admin/login',
+    logOut: '/user/out',
     register: {
-      sendMail: '/merchant/send/email',
-      toRegister: '/merchant/reg'
+      sendMail: '/user/send/email',
+      toRegister: '/user/reg'
     }
   },
-  account: {
-    currency: {
-      query: '/exchange/rate/list'
+  permission: {
+    account: {
+      query: '/admin/list'
+    }
+  },
+  video: {
+    callList: {
+      query: '/agora/call/list'
     },
-    merchant: {
-      query: '/merchant/find',
-      edit: '/merchant/update'
+    scale: {
+      query: '/agora/query/scale'
     },
-    company: {
-      query: '/company/info/page',
-      save: '/company/info/save',
-      saveFile: '/file/upload',
-      edit: '/company/info/update'
+    experience: {
+      query: '/agora/query/experience'
     },
-    app: {
-      queryApp: '/app/page',
-      edit: '/app/update',
-      save: '/app/audit/save/{type}',
-      // save: '/app/audit/save',
-      approval: '/app/audit/list/app/info',
-      updApproval: '/app/audit/update'
+    network: {
+      query: '/agora/query/network'
     },
-    record: {
-      query: {
-        in: '/alipay/order/page',
-        detl: '/paytm/order/result/list/{orderId}',
-        out: '/paytm/pay/out/page'
-      },
-      exportExcel: {
-        in: '/alipay/order/export/excel',
-        out: '/paytm/pay/out/export/excel'
-      }
+    abnormal: {
+      query: '/agora/exception/diagnosis'
+    }
+  },
+  user: {
+    user: {
+      query: '/user/page',
+      allot: '/user/update'
     },
-    settlement: {
-      query: {
-        in: '/order/settlement/page',
-        out: '/payout/settlement/page'
-      },
-      detl: {
-        in: '/order/settlement/find/order/info',
-        out: '/payout/settlement/find/payout/info'
-      }
+    active: {
+      query: '/user/get/active'
+    }
+  },
+  audit: {
+    anchor: {
+      query: '/anchor/page',
+      allot: '/anchor/audit'
     },
-    summary: {
-      query: {
-        in: '/merchant/settlement/page/settlement',
-        out: '/merchant/payout/settlement/page/payout/settlement'
-      }
+    withdraw: {
+      query: '/user/withdraw/page',
+      allot: '/user/withdraw/audit'
     },
-    // 余额提现
-    balanceWithdrawal: {
-      query: '/merchant/settlement/find/amount',
-      approval: '/merchant/withdrawal/save'
+    feedback: {
+      query: '/inform/page',
+      allot: '/inform/update'
+    }
+  },
+  record: {
+    pay: {
+      query: '/gold/info/page'
     },
-    withdrawal: {
-      query: '/merchant/withdrawal/page'
+    recharge: {
+      query: '/user/rec/page'
+    },
+    withdraw: {
+      query: '/user/withdraw/page'
+    }
+  },
+  statistics: {
+    pay: {
+      query: '/gold/info/page/statistics'
+    },
+    recharge: {
+      query: '/user/rec/page/count'
+    },
+    withdraw: {
+      query: '/user/withdraw/page/statistical'
+    }
+  },
+  control: {
+    gifts: {
+      query: '/dictionary/page',
+      save: '/dictionary/save/gifts',
+      upd: '/dictionary/update/gifts'
+    },
+    upload: {
+      query: '/apk/page',
+      save: '/apk/upload',
+      upd: '/apk/upload'
     }
   }
 }

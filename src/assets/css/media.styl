@@ -1,93 +1,55 @@
-@media (max-width 1024px)
-  #userCent .section
-    width 100%
-    padding-left 5px !important
-    padding-right 5px !important
+// login
+.login_text
+  text-align center
+  font-size 30px
+  margin-bottom 20px
+  color #333
+
+@media (min-width 970px)
+  for $c in 0 .. 10
+    $percent = ($c * 10px)
+    .p-md-{$c}
+      padding $percent
+    .pt-md-{$c}
+      padding-top $percent
+    .pr-md-{$c}
+      padding-right $percent
+    .pl-md-{$c}
+      padding-left $percent
+    .pb-md-{$c}
+      padding-bottom $percent
+    .m-md-{$c}
+      margin $percent
+    .mt-md-{$c}
+      margin-top $percent
+    .mr-md-{$c}
+      margin-right $percent
+    .mb-md-{$c}
+      margin-bottom $percent
+    .ml-md-{$c}
+      margin-left $percent
+
 @media (max-width 768px)
-  //订单
-  #record
-    .ant-form-item
-      //width calc(50% - 3px)
-      margin 0 3px 15px 0
-      width 95%
-  //用户中心
-  #userCent
-    &>.header.mobile + .section
-      position fixed
-    .navbar_icon
-      margin-left 10px
-    .navbar_icon
-      width 30%
-      span
-        display inline-block
-        padding 0 5px
-    ul
-      padding-left 0
-    .header
-      height 63px
-      background-image -webkit-linear-gradient(100deg, #1546a0, #0070ba)
-      background-image linear-gradient(100deg, #1546a0, #0070ba)
-      &.mobile .nav_mobile
-        display block
-      &.mobile .nav_box
-        width 50%
-        left 0
-      .nav_box
-        background #114FA6
-        z-index 100
-        left -100%
-        height 100%
-        max-height auto
-        position fixed
-        padding-left 0
-        .side_menu
-          width 100%
-        .tool
-          display block
-          padding-top 35px
-          width 100%
-          &.tool span
-            border-bottom none
-            &:last-child
-              text-decoration underline
-        li
-          padding 0 30px
-          width 100%
-          margin 0
-          span
-            width 100%
-            padding 15px 0
-            display block
-            border-bottom 1px solid #296EB6
-          &.active
-            background #0070BA
-            span
-              border-color transparent
-      .navbar_box
-        display flex
-        width 100%
-        height 100%
-        align-items center
-        padding 0
-        &>.navbar_logo
-          text-align center
-          width 30%
-        &>.navbar_iconGroup
-          text-align right
-          width 30%
-    &>.section
-      width 100%
-      padding 72px 8px 38px !important
-@media (max-width 640px)
-  //登录注册
+  .ant-layout .ant-layout-header .logout_btn
+    padding 0
+  // 登录
   #open
     .register, .login
+      .login_box
+        padding 40px 15px 0
       .section
         .login_btn
-          margin 29px 32px
+          margin 30px 32px
         .sign_box
-          padding 50px 15px 20px !important
-          width 96%
-@media (max-width 479px)
-  #account .header.mobile .nav_box
-    width 70%
+          padding 0 0 10px
+          width 95%
+
+@media (max-width 640px)
+  .ant-modal
+    width 90% !important
+  .aside_box .ant-layout-sider
+    width 0 !important
+    min-width 0 !important
+  .aside_box.slide .ant-layout-sider
+    width 80px !important
+    min-width 80px !important

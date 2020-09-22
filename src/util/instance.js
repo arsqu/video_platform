@@ -1,6 +1,8 @@
+// import util from '@util/util'
+
 const instance = axios.create({
-  withCredentials: true, // 允许跨域携带cookie
-  timeout: 15 * 1000 // 允许超时时间 10s
+  withCredentials: true,
+  timeout: 0 * 1000
 })
 
 // 请求拦截
@@ -18,6 +20,7 @@ instance.interceptors.request.use(request => {
 instance.interceptors.response.use(response => {
   return response
 }, err => {
+  console.dir(err)
   return Promise.reject(err)
 })
 

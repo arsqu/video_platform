@@ -1,19 +1,30 @@
 <template>
+  <!-- slot-scope="record" -->
   <a-table
     :columns="columns"
     :data-source="tableData"
-    :rowKey="record=>record.id"
+    :rowKey="record => record.id"
     :pagination="pagination"
-    :scroll="scroll"
+    :scroll="expand.table ? {} : scroll"
+    :loading="loading"
     :size="size"
-    @change="(pagination, filters, sorter)=>{change(pagination, filters, sorter)}"
-    bordered
+    @change="
+      (pagination, filters, sorter) => {
+        change(pagination, filters, sorter)
+      }
+    "
+    :bordered="bordered"
   >
-    <!-- <template v-for="(item, idx) in columns" :slot="item.slotName">
-      <span :key="idx">{{ this.mWords(item.slotName) }}</span>
-    </template>-->
-    <!-- 数据内容 -->
-    <!-- <span slot="cusContent" slot-scope="txt">{{ txt }}</span> -->
+    <template v-if="expand.table">
+      <a-table
+        slot-scope="record"
+        slot="expandedRowRender"
+        :columns="expand.table.columns"
+        :data-source="record[expand.table.childKey] || []"
+        :rowKey="record => record.id"
+        :pagination="false"
+      ></a-table>
+    </template>
   </a-table>
 </template>
 
@@ -23,6 +34,24 @@ export default {
     return {}
   },
   props: {
+    expand: {
+      type: String,
+      default() {
+        return false
+      }
+    },
+    loading: {
+      type: String,
+      default() {
+        return false
+      }
+    },
+    bordered: {
+      type: String,
+      default() {
+        return true
+      }
+    },
     size: {
       type: String
     },
@@ -57,7 +86,7 @@ export default {
       }
     }
   },
-  created() {},
+  mounted() {},
   methods: {}
 }
 </script>

@@ -41,14 +41,14 @@ const common = {
         'https://cdn.bootcss.com/axios/0.19.0/axios.min.js',
         '/static/js/axios.min.js'
       ]
-    },
-    {
-      key: 'moment',
-      url: [
-        'http://cdn.staticfile.org/moment.js/2.24.0/moment.min.js',
-        '/static/js/moment.min.js'
-      ]
     }
+    // {
+    //   key: 'moment',
+    //   url: [
+    //     'http://cdn.staticfile.org/moment.js/2.24.0/moment.min.js',
+    //     '/static/js/moment.min.js'
+    //   ]
+    // }
     // ,
     // {
     //   key: 'antd',
@@ -59,7 +59,8 @@ const common = {
     // }
   ],
   css: [
-    'https://cdn.bootcdn.net/ajax/libs/ant-design-vue/2.0.0-beta.1/antd.min.css'
+    '/static/css/antd.min.css'
+    // 'https://cdn.bootcdn.net/ajax/libs/ant-design-vue/2.0.0-beta.1/antd.min.css',
   ]
 }
 
@@ -78,23 +79,20 @@ function matchCdn(obj, keyArr, type) {
 }
 
 const index = {
-  js: matchCdn(common, ['Observable', 'Vue', 'VueI18n', 'VueRouter', 'Vuex', 'axios', 'moment'], 'js'),
+  // , 'moment'
+  js: matchCdn(common, ['Observable', 'Vue', 'VueI18n', 'VueRouter', 'Vuex', 'axios'], 'js'),
   css: matchCdn(common, [], 'css')
 }
 
-const open = {
-  js: matchCdn(common, ['Observable', 'Vue', 'VueI18n', 'VueRouter', 'Vuex', 'axios', 'moment'], 'js'),
-  css: matchCdn(common, [], 'css')
-}
-
-// , 'antd'
-const account = {
-  js: matchCdn(common, ['Observable', 'Vue', 'VueI18n', 'VueRouter', 'Vuex', 'axios', 'moment'], 'js'),
+const login = {
+  // js: matchCdn(common, ['Observable', 'Vue', 'VueI18n', 'VueRouter', 'Vuex', 'axios', 'moment'], 'js'),
+  // , 'moment'
+  //  'moment'
+  js: matchCdn(common, ['Observable', 'Vue', 'VueI18n', 'VueRouter', 'Vuex', 'axios'], 'js'),
   css: matchCdn(common, [], 'css')
 }
 
 module.exports = {
   index,
-  open,
-  account
+  login
 }

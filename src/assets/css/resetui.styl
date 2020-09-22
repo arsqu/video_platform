@@ -1,0 +1,97 @@
+#nprogress .bar
+  background #409EFF !important
+  height 2px
+
+/* main */
+.main_container
+  height 100%
+  & .main_box
+    height 100%
+  & .aside_box
+    height 100%
+    box-shadow 2px 0 8px 0 rgba(29, 35, 41, .05)
+    & .ant-layout-sider
+      height 100%
+      overflow hidden
+      & .ant-layout-sider-children
+        margin-right -18px
+        height 100%
+        overflow-x hidden
+        overflow-y scroll
+
+.layout_box
+  margin 24px 16px 14px
+  padding 24px 24px 0px
+  background #fff
+  min-height 280px
+
+.ant-layout
+  .head_mid
+    background #fff
+    border-top 1px solid #e8e8e8
+    border-left 1px solid #e8e8e8
+    padding 5px 0 0 10px
+  .ant-layout-header
+    padding 0
+    color #333
+    background-color #fff
+    & .head_top
+      padding 0 16px
+      display flex
+      align-items center
+      height 100%
+      border-left 1px solid #e8e8e8
+      & .breadcrumb
+        flex 1
+        padding 0 10px
+    & .logout_btn
+      font-size 15px
+      color #666
+      cursor pointer
+      padding 0 25px
+      -webkit-transition .45s ease
+      transition .45s ease
+    & .logout_btn:hover
+      background #d76162
+      color #fff
+
+// ant-upload
+.ant-upload-select-picture-card i
+  font-size 32px
+  color #999
+
+.ant-upload-select-picture-card .ant-upload-text
+  margin-top 8px
+  color #666
+
+.ant-upload-list-picture-card i
+  color hsla(0, 0, 100%, .85)
+
+// ant-input
+.ant-input[disabled]
+  background-color #faf7f7
+  color #a8a8a8
+
+// drop-menu
+.ant-dropdown-menu-item.active
+  background-color #e6f7ff
+
+.ant-modal-confirm-body>.anticon+.ant-modal-confirm-title+.ant-modal-confirm-content
+  margin-left auto
+
+/* el-form */
+.el-form--inline .el-form-item.layout
+  display block
+
+.el-form--inline .el-form-item.layout .el-form-item__label
+  float left
+
+.el-form--inline .el-form-item.layout .el-form-item__content
+  display block
+
+.el-form--inline .el-form-item.layout .el-textarea
+  position relative
+  display inline-block
+  width 50%
+  vertical-align bottom
+  font-size 14px

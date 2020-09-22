@@ -1,9 +1,15 @@
 <template>
-  <a-result status="404" title="404" sub-title="Sorry, the page you visited does not exist.">
-    <template #extra>
-      <a-button type="primary" @click="reBack">Back Home</a-button>
-    </template>
-  </a-result>
+  <div>
+    <a-result
+      status="404"
+      title="404"
+      sub-title="Sorry, the page you visited does not exist."
+    >
+      <template #extra>
+        <a-button type="primary" @click="reBack">Back Home</a-button>
+      </template>
+    </a-result>
+  </div>
 </template>
 
 <script>
@@ -15,15 +21,15 @@ export default {
     }
   },
   mounted() {
+    console.log(this.$route)
     this.publicPath = util.getPublicPath()
   },
   methods: {
     reBack() {
-      location.href = this.publicPath + 'account.html'
+      location.href = this.publicPath + 'index.html'
     }
   }
 }
 </script>
 
-<style>
-</style>
+<style></style>

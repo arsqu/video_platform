@@ -11,16 +11,17 @@ module.exports = {
     parser: 'babel-eslint'
   },
   rules: {
-    'space-before-function-paren': 0, // 函数前不检测空格,和beauty格式化冲突
     'no-console': 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'space-before-function-paren': 0, // 函数前不检测空格,和格式化冲突
     'standard/no-callback-literal': 0
   },
-  "globals": {
+  globals: {
     "Vue": false,
     "axios": false,
     "VueI18n": false,
     "Vuex": false,
+    "VueRouter": false,
     "moment": false
   },
 }

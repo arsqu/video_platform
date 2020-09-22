@@ -3,8 +3,8 @@
 // cdn 配置
 const cdnConfig = require('./config/cdn.config')
 const path = require('path')
+const webpack = require('webpack')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
-// const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 const externals = {
   vue: 'Vue',
@@ -12,9 +12,10 @@ const externals = {
   Axios: 'axios',
   // antd: 'antd',
   vuex: 'Vuex',
-  VueI18n: 'VueI18n',
-  moment: 'moment' // (如果不使用cdn moment会把语言文件一起打包(500k+))[http://momentjs.cn/docs/]
+  VueI18n: 'VueI18n'
 }
+
+// moment: 'moment' // (如果不使用cdn moment会把语言文件一起打包(500k+))[http://momentjs.cn/docs/]
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -22,9 +23,6 @@ function resolve(dir) {
 
 function htmlWebPack(config, str) {
   config.plugin('html-' + str).tap(args => {
-    if (str === 'login') {
-      str = 'open'
-    }
     args[0].cdn = cdnConfig[str]
     return args
   })
@@ -38,46 +36,65 @@ function delPreload(config, str) {
   config.plugins.delete('preload-' + str)
 }
 
-module.exports = {
+const isProd = process.env.NODE_ENV === 'production'
+
+const vueConfig = {
   publicPath: process.env.VUE_APP_PUBLIC_PATH,
-  outputDir: 'dist/' + process.env.VUE_APP_PUBLIC_DOC,
+  // assetsDir: 'pub', // 指定静态资源的输出目录默认为public文件夹,优先级最低
+  outputDir: `dist/${process.env.VUE_APP_PUBLIC_DOC}`, // 文件输出的目录
+  // filenameHashing: false, //文件名是否使用hash
   css: {
-    extract: process.env.NODE_ENV === 'production'
+    extract: !!isProd
   },
   pages: {
-    // index: {
-    //   entry: './src/script/index/index.js',
-    //   title: '商户平台',
-    //   template: 'public/index.html'
-    // },
     login: {
       entry: './src/script/open/index.js',
-      title: '商户登录',
-      template: 'public/login.html'
+      title: '视频后台登录',
+      template: 'public/login.html',
+      // chunks: ['chunk-antdv', 'chunk-common', 'login']
+      chunksSortMode: 'dependency',
+      chunks: ['chunk-vendors', 'chunk-ui', 'chunk-common', 'login']
+      // chunks: ['chunk-vendors', 'chunk-common', 'login']
     },
-    account: {
-      entry: './src/script/account/index.js',
-      title: '商户中心',
-      template: 'public/account.html'
+    index: {
+      entry: './src/script/index/index.js',
+      title: '视频后台',
+      chunksSortMode: 'dependency',
+      template: 'public/index.html',
+      // chunks: ['chunk-vendors', 'chunk-antdv', 'chunk-common', 'index']
+      chunks: ['chunk-vendors', 'chunk-ui', 'chunk-common', 'index']
+      // chunks: ['chunk-vendors', 'chunk-common', 'index']
     }
-    // ,
-    // testbuild: {
-    //   entry: './src/script/testbuild/index.js',
-    //   title: '商户测试',
-    //   template: 'public/testbuild.html'
-    // }
   },
   chainWebpack: config => {
     config.externals(externals)
-    if (process.env.packView) {
-      config
-        .plugin('webpack-bundle-analyzer')
-        .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
-    }
-    // config.module.rule('less').use('less').loader('less-loader').options({
-    //   lessOptions: {
-    //     javascriptEnabled: true
-    //   }
+    config.resolve.alias
+      .set('@assets', '@/assets')
+      .set('@components', '@/components')
+      .set('@util', '@/util')
+      .set('@script', '@/script')
+      .set('@router', '@/router')
+      .set('@store', '@/store')
+      .set('@locales', '@/locales')
+      .set('@views', '@/views')
+      .set('@mixin', '@/mixin')
+      .set('@ant-design/icons/lib/dist$', resolve('./src/script/antd-module-icon.js'))
+    config.module.rule('less').oneOf('normal').use('less-loader')
+      .options({
+        sourceMap: false,
+        lessOptions: {
+          modifyVars: {
+            'primary-color': '#256BFF'
+          },
+          javascriptEnabled: true
+        }
+      })
+    // 指定css文件输出目录
+    // config.plugin('extract-css').tap(args => {
+    //   return [{
+    //     filename: 'lass/[name].[contenthash:8].css',
+    //     chunkFilename: 'lass/[name].[contenthash:8].css'
+    //   }]
     // })
     // config.module.rule('js').use('babel').loader('babel-loader').options({
     //   presets: ['@vue/cli-plugin-babel/preset'],
@@ -86,21 +103,18 @@ module.exports = {
     //     ['import', {
     //       libraryName: 'ant-design-vue',
     //       libraryDirectory: 'es',
-    //       style: 'css'
+    //       style: 'css' // true 为 less 文件
     //     }]
     //   ]
     // })
-    // htmlWebPack(config, 'index')
+    htmlWebPack(config, 'index')
     htmlWebPack(config, 'login')
-    htmlWebPack(config, 'account')
     // 彻底删除prefetch
-    // delPrefetch(config, 'index')
+    delPrefetch(config, 'index')
     delPrefetch(config, 'login')
-    delPrefetch(config, 'account')
     // 彻底删除preload
-    // delPreload(config, 'index')
+    delPreload(config, 'index')
     delPreload(config, 'login')
-    delPreload(config, 'account')
 
     // 含有myasyncRoute名字的路由会加入白名单
     // config.plugin('prefetch-index').tap(options => {
@@ -108,19 +122,11 @@ module.exports = {
     //   options[0].fileBlacklist.push(/myasyncRoute(.)+?\.js$/)
     //   return options
     // })
-    // config.output.filename = 'js/[name].js?version=' + process.env.VUE_APP_VERSION
-    // config.output.chunkFilename = 'js/[name].js?version=' + process.env.VUE_APP_VERSION
-    config.resolve.alias
-      .set('@assets', '@/assets')
-      .set('@util', '@/util')
-      .set('@script', '@/script')
-      .set('@router', '@/router')
-      .set('@store', '@/store')
-      .set('@locales', '@/locales')
-      .set('@components', '@/components')
-      .set('@src', '@/src')
-      .set('@views', '@/views')
-      .set('@ant-design/icons/lib/dist$', resolve('./src/script/antd-module-icon.js'))
+    if (process.env.VUE_APP_PREVIEW) {
+      config
+        .plugin('webpack-bundle-analyzer')
+        .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+    }
   },
   pluginOptions: {
     i18n: {
@@ -133,7 +139,7 @@ module.exports = {
   productionSourceMap: false,
   configureWebpack: config => {
     // 开发环境下打包gzip
-    if (process.env.NODE_ENV === 'production') {
+    if (isProd) {
       // 版本号
       const fileName = `js/[name].[contenthash:8].js?version=${process.env.VUE_APP_VERSION}`
       config.output.filename = fileName
@@ -142,7 +148,6 @@ module.exports = {
       const plugins = [
         new CompressionWebpackPlugin({
           algorithm: 'gzip',
-          // test: new RegExp('\\.(' + ['js', 'css'].join('|') + ')$'),
           test: new RegExp('\\.(' + ['js', 'css'].join('|') + ')'),
           filename: '[path].gz[query]',
           threshold: 10240,
@@ -164,45 +169,67 @@ module.exports = {
         comments: false
       }
     }
-    // config.optimization.splitChunks.cacheGroups = {
-    //   vendors: {
-    //     name: 'chunk-vendors',
-    //     test: /[\\/]node_modules[\\/]/,
-    //     priority: -20,
-    //     chunks: 'all'
-    //   },
-    //   common: {
-    //     name: 'chunk-common',
-    //     minChunks: 2,
-    //     priority: -20,
-    //     chunks: 'all',
-    //     reuseExistingChunk: true
-    //   }
-    // }
+    // 屏蔽moment語言包
+    config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/))
+    config.optimization.splitChunks.cacheGroups = {
+      ui: {
+        name: 'chunk-ui',
+        test: /[\\/]node_modules[\\/](ant-design-vue|moment)[\\/]/,
+        priority: -5,
+        chunks: 'initial'
+      },
+      vendors: {
+        name: 'chunk-vendors',
+        test: /[\\/]node_modules[\\/]/,
+        priority: -10,
+        chunks: 'all'
+      },
+      common: {
+        name: 'chunk-common',
+        minChunks: 2,
+        reuseExistingChunk: true,
+        priority: -20,
+        chunks: 'initial'
+      }
+    }
   },
   devServer: {
-    host: '192.168.1.103',
-    port: 8083,
+    // host: '192.168.1.112',
+    host: '192.168.31.25',
+    port: 8085,
     https: false,
     open: false,
     historyApiFallback: {
       verbose: true,
       rewrites: [
         { from: /^\/open\/.*$/, to: '/login.html' },
-        { from: /^\/account\/.*$/, to: '/account.html' },
-        // { from: /^\/testbuild\/.*$/, to: '/testbuild.html' },
-        // { from: /^\/.*/, to: '/index.html' }
-        { from: /^\/.*/, to: '/login.html' } // 暂时修改
+        { from: /^\/.*/, to: '/index.html' }
       ]
     },
     proxy: {
       '/api': {
-        target: 'http://192.168.1.106:8080',
+        target: 'http://192.168.31.76:8071',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
+        }
+      },
+      '/svga': {
+        target: 'http://img.schat.club',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/svga': ''
+        }
+      },
+      '/csvga': {
+        target: 'https://video-bored.oss-cn-hangzhou.aliyuncs.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/csvga': ''
         }
       }
     }
   }
 }
+
+module.exports = vueConfig

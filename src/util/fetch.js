@@ -4,27 +4,31 @@ import util from '@util/util'
 
 // 响应状态码
 function statusCode(code) {
-  var expires = [4019, 4020]
+  var expires = [5010, 5011, 5012]
   // 登录过期
   if (expires.indexOf(code) !== -1) {
     Vue.prototype.$message.error(Vue.prototype.$vueI18n.t('statusCode.' + code))
     util.setPath(location.href)
     util.clearItem() // 清空
-    util.toLogin()
+    setTimeout(_ => {
+      util.toLogin()
+    }, 800)
     return
   }
   if (code !== 200 && code) {
     Vue.prototype.$message.destroy()
-    // Vue.prototype.$message.error(i18n.t('statusCode.' + code))
     Vue.prototype.$message.error(Vue.prototype.$vueI18n.t('statusCode.' + code))
   }
 }
 
 // 服务端错误
-function errCode() {
+function errCode(err) {
   Vue.prototype.$message.destroy()
-  // Vue.prototype.$message.error(i18n.t('errCode'))
-  Vue.prototype.$message.error(Vue.prototype.$vueI18n.t('errCode'))
+  if (err.message) {
+    Vue.prototype.$message.error(err.message)
+  } else {
+    Vue.prototype.$message.error(Vue.prototype.$vueI18n.t('errCode'))
+  }
 }
 
 // get
@@ -48,7 +52,6 @@ function postData(url, data, config) {
   }
   return new Promise((resolve, reject) => {
     $axios.post(url, data, config).then(response => {
-      console.log(response)
       statusCode(response.data.code)
       resolve(response.data)
     }).catch(err => {

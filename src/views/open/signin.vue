@@ -2,51 +2,65 @@
   <div class="register">
     <div class="section">
       <div class="sign_box">
-        <div class="header">
-          <a :href="publicPath" class="web_logo"></a>
-        </div>
-        <a-form-model
-          ref="ruleForm"
-          layout="vertical"
-          :model="ruleForm"
-          :rules="rules"
-          :label-col="labelCol"
-          :wrapper-col="wrapperCol"
-          @keyup.native.enter="submitForm"
-        >
-          <a-form-model-item :label="mWords('identity','l')" prop="identity">
-            <a-input
-              size="large"
-              type="text"
-              v-model="ruleForm.identity"
-              :placeholder="mWords('identity','p')"
-            />
-          </a-form-model-item>
-          <a-form-model-item class="form-item-password" :label="mWords('pwd','l')" prop="pwd">
-            <a-input
-              size="large"
-              type="password"
-              v-model="ruleForm.pwd"
-              :placeholder="mWords('pwd','p')"
-            />
-          </a-form-model-item>
-          <a-form-model-item align="center">
-            <a-button
-              block
-              type="primary"
-              :loading="loading"
-              size="large"
-              @click="submitForm"
-            >{{$t('btnGroup.signin')}}</a-button>
-            <!-- <a-button style="margin-left: 10px" @click="resetForm('ruleForm')">Reset</a-button> -->
-          </a-form-model-item>
-          <!-- <a-divider /> -->
-          <a-divider>or</a-divider>
-          <a-form-model-item class="mb-0" align="center">
-            <router-link tag="a" :to="{name:'signup'}">{{$t('btnGroup.signup')}}</router-link>
-            <!-- <a href="/open/signup.html">{{$t('btnGroup.signup')}}</a> -->
-          </a-form-model-item>
-        </a-form-model>
+        <a-row class="login_form">
+          <a-col class="pr-7 login_img" :xs="0" :md="12">
+            <img src="~@assets/image/logo_pic.png" alt="" />
+          </a-col>
+          <a-col class="pl-7 login_box" :xs="24" :md="12">
+            <div class="login_text mb-md-7">视频后台管理</div>
+            <a-form-model
+              ref="ruleForm"
+              layout="vertical"
+              :model="ruleForm"
+              :rules="rules"
+              :label-col="labelCol"
+              :wrapper-col="wrapperCol"
+              @keyup.native.enter="submitForm"
+            >
+              <!-- :label="mWords('identity', 'l')" -->
+              <a-form-model-item prop="identity">
+                <a-input
+                  size="large"
+                  type="text"
+                  autocomplete="username"
+                  v-model="ruleForm.identity"
+                  :placeholder="mWords('identity', 'p')"
+                >
+                  <a-icon slot="suffix" type="user" />
+                </a-input>
+              </a-form-model-item>
+              <!-- :label="mWords('pwd', 'l')" -->
+              <a-form-model-item class="form-item-password" prop="password">
+                <!-- a-input-password -->
+                <a-input
+                  size="large"
+                  type="password"
+                  autocomplete="current-password"
+                  v-model="ruleForm.password"
+                  :placeholder="mWords('pwd', 'p')"
+                >
+                  <a-icon slot="suffix" type="lock" />
+                </a-input>
+              </a-form-model-item>
+              <a-form-model-item align="center" class="mt-md-9">
+                <a-button
+                  block
+                  type="primary"
+                  :loading="loading"
+                  size="large"
+                  @click="submitForm"
+                  >{{ $t('btnGroup.signin') }}</a-button
+                >
+              </a-form-model-item>
+              <!-- <a-divider /> -->
+              <!-- <a-form-model-item class="mb-0" align="center">
+            <router-link tag="a" :to="{ name: 'signup' }">{{
+              $t('btnGroup.signup')
+            }}</router-link>
+          </a-form-model-item> -->
+            </a-form-model>
+          </a-col>
+        </a-row>
       </div>
     </div>
   </div>
@@ -56,15 +70,13 @@
 export default {
   data() {
     return {
-      // form-model
+      publicPath: '',
       ruleForm: {
         identity: '',
         // email: '',
-        pwd: ''
+        password: ''
       },
-      publicPath: '',
       loading: false,
-      // validate rule
       rules: {
         identity: [
           {
@@ -72,13 +84,8 @@ export default {
             message: this.mWords('identity', 'r'),
             trigger: 'blur'
           }
-          // {
-          //   message: this.mWords('identity', 'v'),
-          //   type: 'email',
-          //   trigger: 'blur'
-          // }
         ],
-        pwd: [
+        password: [
           {
             required: true,
             message: this.mWords('pwd', 'r'),
@@ -88,10 +95,10 @@ export default {
       }
     }
   },
-  created() {
+  created() {},
+  mounted() {
     this.publicPath = this.$util.getPublicPath()
   },
-  mounted() {},
   methods: {
     mWords(key, text) {
       return this.$util.mWords('login.form', key, text)
@@ -115,7 +122,7 @@ export default {
         var id = this.ruleForm.identity
         var k
         if (id.indexOf('@') !== -1) {
-          k = 'email'
+          k = 'umail'
         } else {
           k = 'account'
         }
@@ -138,12 +145,12 @@ export default {
                 setTimeout(_ => {
                   console.log(this.publicPath)
                   if (!path || path === '/') {
-                    path = 'account.html'
+                    path = 'index.html'
                     location.href = this.publicPath + path
                   } else {
                     location.href = path
                   }
-                  sessionStorage.clearItem('path')
+                  sessionStorage.removeItem('path')
                 }, 300)
               }
               console.log(data)
@@ -160,70 +167,34 @@ export default {
 </script>
 
 <style lang="stylus">
-//覆盖全局样式
+// 覆盖全局样式
 body
-  background #FBFBFE
+  background #246AFE url('~@assets/image/logo_bg.png') no-repeat center
+  background-size contain
+  position relative
   height auto
 </style>
 
 <style lang="stylus" scoped>
-.register
-  width 100%
-  & >>> .ant-divider-inner-text
-    color #6c7378
-    font-weight normal
-.header
-  position absolute
-  font-size 0
-  top 0
-  width 100%
-  //max-width 1190px
-  text-align center
-  margin auto
-  left 0
-  right 0
-  z-index 2
-  a
-    margin 20px 32px
-  .web_logo
-    display inline-block
-    width 124px
-    height 53px
-    background url('~@assets/image/logo.png') 0 0 / 124px 53px
-    background-image url('~@assets/image/logo.png'), none
-  .login_btn
-    background 0 0
-    color #1781B2
-    border-color #1781B2
-    position absolute
-    right 0
-    top 0
-    &:hover
-      color #253B80
-      border-color #253B80
+.login_img img
+  position: relative;
+  margin-bottom: -60px;
+  width: 100%;
 .section
   .sign_box
+    padding 90px 110px 20px
     margin 100px auto
     position relative
-    margin-left auto
     color #20123b
-    margin-right auto
-    max-width 480px
-    background-color #fff
+    max-width 1260px
     background #fff
-    border-radius 16px
-    -webkit-box-shadow 0 2px 8px 0 rgba(0, 0, 0, .16)
-    box-shadow 0 2px 8px 0 rgba(0, 0, 0, .16)
-    padding 93px 40px 15px
-    .form-item-password >>> .ant-form-extra
-      position absolute
-      top 0
-      right 0
-      padding 0
-      line-height 32px
-      margin-top -32px
-      color #108ee9
-    .sign_desc
-      text-align center
-      font-size 23px
+    border-radius 10px
+    // box-shadow 0 2px 8px 0 rgba(0, 0, 0, .16)
+    box-shadow: 0 2px 30px 15px rgba(0,0,0,0.3);
+    & >>> .ant-input-lg
+      height 55px
+    & >>> .ant-form-item
+      margin-bottom 15px
+    & >>> .ant-btn
+      height 55px
 </style>

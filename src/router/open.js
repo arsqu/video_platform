@@ -1,5 +1,4 @@
 
-// 地址栏做了rewrite处理
 const routes = [
   {
     path: '/login.html',
@@ -10,18 +9,18 @@ const routes = [
     name: 'signin',
     component: () => import(/* webpackChunkName: "signin" */ '@views/open/signin.vue')
   },
-  {
-    path: '/open/signup.html',
-    name: 'signup',
-    component: () => import(/* webpackChunkName: "signup" */ '@views/open/signup.vue')
-  },
-  {
-    path: '/open/*',
-    redirect: '/404.html'
-  },
+  // {
+  //   path: '/open/signup.html',
+  //   name: 'signup',
+  //   component: () => import(/* webpackChunkName: "signup" */ '@views/open/signup.vue')
+  // },
+  // {
+  //   path: '/open/*',
+  //   redirect: '/404.html'
+  // },
   {
     path: '*',
-    redirect: '/login.html'
+    redirect: '/404.html'
   },
   {
     path: '/404.html',

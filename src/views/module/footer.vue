@@ -3,29 +3,20 @@
     <div class="txtGroup">
       <ul>
         <li>
-          <a href="javascript:;" @click="showDev">Contact Us</a>
-        </li>
-        <li>
-          <a href="javascript:;" @click="showDev">Privacy</a>
-        </li>
-        <li>
-          <a href="javascript:;" @click="showDev">Legal</a>
-        </li>
-      </ul>
-      <ul>
-        <li>
           <a-dropdown :trigger="['click']" placement="topCenter">
             <a class="ant-dropdown-link" @click="e => e.preventDefault()">
-              {{language}}
+              {{ language }}
               <img src="~@assets/image/svg/down.svg" class="svg svg-down" />
             </a>
             <a-menu slot="overlay">
               <a-menu-item
-                v-for="(item,idx) in langConfig"
+                v-for="(item, idx) in langConfig"
                 :key="idx"
-                :class="{'active':idx == locale}"
+                :class="{ active: idx == locale }"
               >
-                <a href="javascript:;" @click="changeLocale(idx)">{{item.v}}</a>
+                <a href="javascript:;" @click="changeLocale(idx)">{{
+                  item.v
+                }}</a>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
@@ -67,11 +58,11 @@ export default {
     changeLocale(locale) {
       if (locale === 'en') {
         this.$i18n.locale = 'en'
-        moment.locale('en') // 时间控件
+        moment && moment.locale('en') // 时间控件
       } else {
         this.$i18n.locale = 'zh'
-        moment.locale('zh-cn')
-        console.log('中文', moment.locale())
+        moment && moment.locale('zh-cn')
+        // console.log('中文', moment.locale())
       }
       localStorage.setItem('language', locale)
       this.language = this.langConfig[this.getLang].k

@@ -1,7 +1,4 @@
-// import Vue from 'vue'
-// import VueI18n from 'vue-i18n'
 import { langConfig } from '@util/config'
-// import util from '@util/util'
 
 const config = getLangConfig()
 const lang = config.lang
